@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { MenuItem } from './MenuItem'
+import MenuItem from './MenuItem'
 
 const DirectoryMenu = styled.div`
   width: 100%;
@@ -55,8 +55,8 @@ export class Directory extends React.Component {
   render () {
     return (
       <DirectoryMenu>
-        {this.state.sections.map(({ title, imageUrl, id, size }) => (
-          <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+        {this.state.sections.map(({ id, ...otherSectionProps }) => (
+          <MenuItem key={id} {...otherSectionProps} />
         ))}
       </DirectoryMenu>
     )

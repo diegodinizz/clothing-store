@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 const BackgroundImage = styled.div`
@@ -24,7 +25,7 @@ const Content = styled.div`
 
 const ItemMenu = styled.div`
   min-width: 30%;
-  height: 240px;
+  height: 290px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -47,7 +48,7 @@ const ItemMenu = styled.div`
   }
 
   &.large {
-    height: 430px;
+    height: 450px;
   }
 
   &:first-child {
@@ -72,12 +73,13 @@ const Subtitle = styled.span`
   font-size: 16px;
 `
 
-export const MenuItem = ({ title, imageUrl, size }) => {
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
   return (
-    <ItemMenu className={size}>
-      <BackgroundImage
-        image={imageUrl}
-      />
+    <ItemMenu
+      className={size}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
+      <BackgroundImage image={imageUrl} />
       <Content>
         <Title>{title.toUpperCase()}</Title>
         <Subtitle>SHOP NOW</Subtitle>
@@ -85,3 +87,5 @@ export const MenuItem = ({ title, imageUrl, size }) => {
     </ItemMenu>
   )
 }
+
+export default withRouter(MenuItem)
