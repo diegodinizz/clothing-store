@@ -1,6 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { FormInput } from './FormInput'
+import { CustomButton } from './CustomButton'
+
+const Container = styled.div`
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+`
 
 export class SignIn extends React.Component {
   constructor (props) {
@@ -26,7 +34,7 @@ export class SignIn extends React.Component {
 
   render () {
     return (
-      <div>
+      <Container>
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
@@ -47,9 +55,9 @@ export class SignIn extends React.Component {
             label='password'
             required
           />
-          <input type='submit' value='Submit Form' />
+          <CustomButton type='submit'>sign in</CustomButton>
         </form>
-      </div>
+      </Container>
     )
   }
 }
