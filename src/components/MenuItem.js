@@ -51,11 +51,11 @@ const ItemMenu = styled.div`
     height: 450px;
   }
 
-  &:first-child {
+  :first-child {
     margin-right: 7.5px;
   }
 
-  &:last-child {
+  :last-child {
     margin-left: 7.5px;
   }
 `
