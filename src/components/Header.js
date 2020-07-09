@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { auth } from '../firebase/firebase.utils'
+
 import { ReactComponent as Logo } from '../assets/crown.svg'
 
 const Container = styled.div`
@@ -28,9 +30,10 @@ const Options = styled.div`
 
 const ShopOption = styled.div`
   padding: 10px 15px;
+  cursor: pointer;
 `
 
-export const Header = () => (
+export const Header = ({ currentUser }) => (
   <Container>
     <Link to='/'>
       <Crown>
@@ -44,6 +47,13 @@ export const Header = () => (
       <Link to='shop'>
         <ShopOption>CONTACT</ShopOption>
       </Link>
+      {currentUser ? (
+        <ShopOption onClick={() => auth.signOut()}>SIGN OUT</ShopOption>
+      ) : (
+        <Link to='signin'>
+          <ShopOption>SIGN IN</ShopOption>
+        </Link>
+      )}
     </Options>
   </Container>
 )

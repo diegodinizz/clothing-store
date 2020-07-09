@@ -4,10 +4,17 @@ import styled from 'styled-components'
 import { FormInput } from './FormInput'
 import { CustomButton } from './CustomButton'
 
+import { signInWithGoogle } from '../firebase/firebase.utils'
+
 const Container = styled.div`
-  width: 30vw;
+  width: 380px;
   display: flex;
   flex-direction: column;
+`
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export class SignIn extends React.Component {
@@ -55,7 +62,12 @@ export class SignIn extends React.Component {
             label='password'
             required
           />
-          <CustomButton type='submit'>sign in</CustomButton>
+          <Buttons>
+            <CustomButton type='submit'>sign in</CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              Sign in with Google
+            </CustomButton>
+          </Buttons>
         </form>
       </Container>
     )

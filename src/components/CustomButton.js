@@ -22,8 +22,23 @@ const Button = styled.button`
     color: black;
     border: 1px solid black;
   }
+
+  &.google-sign-in {
+    background-color: #4285f4;
+    color: white;
+
+    :hover {
+      background-color: #357ae8;
+      border: none;
+    }
+  }
 `
 
-export const CustomButton = ({ children, ...otherProps }) => (
-  <Button {...otherProps}>{children}</Button>
+export const CustomButton = ({ children, isGoogleSignIn, ...otherProps }) => (
+  <Button
+    className={`${isGoogleSignIn ? 'google-sign-in' : ''}`}
+    {...otherProps}
+  >
+    {children}
+  </Button>
 )
