@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { auth } from '../firebase/firebase.utils'
 
 import { ReactComponent as Logo } from '../assets/crown.svg'
+
 
 const Container = styled.div`
   height: 70px;
@@ -33,7 +35,7 @@ const ShopOption = styled.div`
   cursor: pointer;
 `
 
-export const Header = ({ currentUser }) => (
+const Header = ({ currentUser }) => (
   <Container>
     <Link to='/'>
       <Crown>
@@ -57,3 +59,9 @@ export const Header = ({ currentUser }) => (
     </Options>
   </Container>
 )
+
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header)
