@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import { CustomButton } from './CustomButton'
+import { CartItem } from './CartItem'
 
 const Container = styled.div`
   position: absolute;
@@ -17,7 +19,7 @@ const Container = styled.div`
   z-index: 5;
 `
 
-const CartItems = styled.div`
+const Cart = styled.div`
   height: 240px;
   display: flex;
   flex-direction: column;
@@ -28,11 +30,21 @@ const Button = styled.div`
   margin: auto;
 `
 
-export const CartDropdown = () => (
+const CartDropdown = ({ cartItems }) => (
   <Container>
-    <CartItems />
+    <Cart>
+      {cartItems.map(cartItem => (
+        <CartItem key={cartItem.id} item={cartItem} />
+      ))}
+    </Cart>
     <Button>
       <CustomButton>GO TO CHECKOUT</CustomButton>
     </Button>
   </Container>
 )
+
+const mapStatetoProps = ({ cart: { cartItems } }) => ({
+  cartItems
+})
+
+export default connect(mapStatetoProps)(CartDropdown)
