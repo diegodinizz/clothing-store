@@ -14,14 +14,6 @@ const Image = styled.div`
   background-image: url(${props => props.image});
 `
 
-const Button = styled.div`
-  width: 50%;
-  opacity: 0.7;
-  position: absolute;
-  top: 255px;
-  display: none;
-`
-
 const Container = styled.div`
   width: 22%;
   display: flex;
@@ -30,12 +22,20 @@ const Container = styled.div`
   align-items: center;
   position: relative;
 
+  button {
+    width: 50%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+    display: none;
+  }
+
   :hover {
     ${Image} {
       opacity: 0.8;
     }
 
-    ${Button} {
+    button {
       opacity: 0.85;
       display: flex;
     }
@@ -53,7 +53,7 @@ const Footer = styled.div`
 const Name = styled.span`
   width: 90%;
   margin-bottom: 15px;
-  margin-right: 50%;
+  /* margin-right: 50%; */
 `
 
 const Price = styled.span`
@@ -70,11 +70,9 @@ const CollectionItem = ({ item, addItem }) => {
         <Name>{name}</Name>
         <Price>{price}</Price>
       </Footer>
-      <Button>
-        <CustomButton onClick={() => addItem(item)} inverted>
-          Add to cart
-        </CustomButton>
-      </Button>
+      <CustomButton onClick={() => addItem(item)} inverted>
+        Add to cart
+      </CustomButton>
     </Container>
   )
 }
