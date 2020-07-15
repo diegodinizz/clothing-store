@@ -32,7 +32,7 @@ export const CartDropdown = () => (
   <Container>
     <CartItems />
     <Button>
-      <CustomButton>GOT TO CHECKOUT</CustomButton>
+      <CustomButton>GO TO CHECKOUT</CustomButton>
     </Button>
   </Container>
 )

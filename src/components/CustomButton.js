@@ -16,6 +16,8 @@ const Button = styled.button`
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 
   :hover {
     background-color: white;
@@ -32,11 +34,30 @@ const Button = styled.button`
       border: none;
     }
   }
+
+  &.inverted {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+
+    :hover {
+      background-color: black;
+      color: white;
+      border: none;
+    }
+  }
 `
 
-export const CustomButton = ({ children, isGoogleSignIn, ...otherProps }) => (
+export const CustomButton = ({
+  children,
+  isGoogleSignIn,
+  inverted,
+  ...otherProps
+}) => (
   <Button
-    className={`${isGoogleSignIn ? 'google-sign-in' : ''}`}
+    className={`${inverted ? 'inverted' : ''} ${
+      isGoogleSignIn ? 'google-sign-in' : ''
+    }`}
     {...otherProps}
   >
     {children}

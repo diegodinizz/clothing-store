@@ -1,13 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
-  width: 22%;
-  display: flex;
-  flex-direction: column;
-  height: 350px;
-  align-items: center;
-`
+import { CustomButton } from './CustomButton'
 
 const Image = styled.div`
   width: 100%;
@@ -16,6 +10,34 @@ const Image = styled.div`
   background-position: center;
   margin-bottom: 5px;
   background-image: url(${props => props.image});
+`
+
+const Button = styled.div`
+  width: 50%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  display: none;
+`
+
+const Container = styled.div`
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  align-items: center;
+  position: relative;
+
+  :hover {
+    ${Image} {
+      opacity: 0.8;
+    }
+
+    ${Button} {
+      opacity: 0.85;
+      display: flex;
+    }
+  }
 `
 
 const Footer = styled.div`
@@ -29,6 +51,7 @@ const Footer = styled.div`
 const Name = styled.span`
   width: 90%;
   margin-bottom: 15px;
+  margin-right: 50%;
 `
 
 const Price = styled.span`
@@ -42,5 +65,8 @@ export const CollectionItem = ({ id, name, price, imageUrl }) => (
       <Name>{name}</Name>
       <Price>{price}</Price>
     </Footer>
+    <Button>
+      <CustomButton inverted>Add to cart</CustomButton>
+    </Button>
   </Container>
 )
