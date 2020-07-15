@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { CustomButton } from './CustomButton'
 import { CartItem } from './CartItem'
+import { selectCartItems } from '../redux/cart/cart.selectors'
 
 const Container = styled.div`
   position: absolute;
@@ -43,8 +44,8 @@ const CartDropdown = ({ cartItems }) => (
   </Container>
 )
 
-const mapStatetoProps = ({ cart: { cartItems } }) => ({
-  cartItems
+const mapStatetoProps = state => ({
+  cartItems: selectCartItems(state)
 })
 
 export default connect(mapStatetoProps)(CartDropdown)

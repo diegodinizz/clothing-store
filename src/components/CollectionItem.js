@@ -53,7 +53,7 @@ const Footer = styled.div`
 const Name = styled.span`
   width: 90%;
   margin-bottom: 15px;
-  /* margin-right: 50%; */
+  margin-right: 50%;
 `
 
 const Price = styled.span`
