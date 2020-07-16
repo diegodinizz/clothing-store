@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { clearItemfromCart } from '../redux/cart/cart.actions'
+import {
+  clearItemfromCart,
+  addItem,
+  removeItem
+} from '../redux/cart/cart.actions'
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +34,14 @@ const Name = styled.span`
 
 const Quantity = styled.span`
   width: 23%;
-  padding-left: 20px;
+  display: flex;
+`
+const Arrow = styled.div`
+  cursor: pointer;
+`
+
+const Value = styled.div`
+  margin: 0 10px;
 `
 
 const Price = styled.span`
@@ -42,7 +53,7 @@ const RemoveButton = styled.div`
   cursor: pointer;
 `
 
-const CheckoutItem = ({ cartItem, clearItem }) => {
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem
 
   return (
@@ -51,7 +62,11 @@ const CheckoutItem = ({ cartItem, clearItem }) => {
         <img alt='item' src={imageUrl} />
       </ImageContainer>
       <Name>{name}</Name>
-      <Quantity>{quantity}</Quantity>
+      <Quantity>
+        <Arrow onClick={() => removeItem(cartItem)}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={() => addItem(cartItem)}>&#10095;</Arrow>
+      </Quantity>
       <Price>{price}</Price>
       <RemoveButton onClick={() => clearItem(cartItem)}>&#10005;</RemoveButton>
     </Container>
@@ -59,7 +74,9 @@ const CheckoutItem = ({ cartItem, clearItem }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  clearItem: item => dispatch(clearItemfromCart(item))
+  clearItem: item => dispatch(clearItemfromCart(item)),
+  addItem: item => dispatch(addItem(item)),
+  removeItem: item => dispatch(removeItem(item))
 })
 
 export default connect(null, mapDispatchToProps)(CheckoutItem)
