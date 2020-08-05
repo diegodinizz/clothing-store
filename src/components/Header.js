@@ -47,7 +47,7 @@ const Header = ({ currentUser, hidden }) => (
       </Crown>
     </Link>
     <Options>
-      <Link to='/shop'>
+      <Link to='shop'>
         <ShopOption>SHOP</ShopOption>
       </Link>
       <Link to='shop'>
