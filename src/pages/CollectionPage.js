@@ -19,11 +19,11 @@ const Title = styled.h2`
 const Collections = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
 `
 
 const Items = styled(Collections)`
   margin-bottom: 30px;
+  grid-gap: 10px;
 `
 
 const CollectionPage = ({ collection }) => {
