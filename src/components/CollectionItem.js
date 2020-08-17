@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { CustomButton } from './CustomButton'
 import { addItem } from '../redux/cart/cart.actions'
 
-const Image = styled.div`
+const BackgroundImage = styled.div`
   width: 100%;
   height: 95%;
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
-  background-image: url(${props => props.image});
+  background-image: url(${({imageUrl}) => imageUrl});
 `
 
 const Container = styled.div`
@@ -22,16 +22,8 @@ const Container = styled.div`
   align-items: center;
   position: relative;
 
-  button {
-    width: 50%;
-    opacity: 0.7;
-    position: absolute;
-    top: 255px;
-    display: none;
-  }
-
-  :hover {
-    ${Image} {
+  &:hover {
+    ${BackgroundImage} {
       opacity: 0.8;
     }
 
@@ -42,7 +34,7 @@ const Container = styled.div`
   }
 `
 
-const Footer = styled.div`
+const FooterContainer = styled.div`
   width: 100%;
   height: 5%;
   display: flex;
@@ -50,14 +42,22 @@ const Footer = styled.div`
   font-size: 18px;
 `
 
-const Name = styled.span`
+const NameContainer = styled.span`
   width: 90%;
   margin-bottom: 15px;
-  margin-right: 50%;
 `
 
-const Price = styled.span`
+const PriceContainer = styled.span`
   width: 10%;
+  text-align: right;
+`
+
+const AddButton = styled(CustomButton)`
+  width: 80%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  display: none;
 `
 
 const CollectionItem = ({ item, addItem }) => {
@@ -65,14 +65,14 @@ const CollectionItem = ({ item, addItem }) => {
 
   return (
     <Container>
-      <Image image={imageUrl} />
-      <Footer>
-        <Name>{name}</Name>
-        <Price>{price}</Price>
-      </Footer>
-      <CustomButton onClick={() => addItem(item)} inverted>
+      <BackgroundImage imageUrl={imageUrl} />
+      <FooterContainer>
+        <NameContainer>{name}</NameContainer>
+        <PriceContainer>{price}</PriceContainer>
+      </FooterContainer>
+      <AddButton onClick={() => addItem(item)} inverted>
         Add to cart
-      </CustomButton>
+      </AddButton>
     </Container>
   )
 }

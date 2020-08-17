@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Directory from '../components/Directory'
 
-const Home = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,8 +12,8 @@ const Home = styled.div`
 
 export const Homepage = () => {
   return (
-    <Home>
+    <Container>
       <Directory />
-    </Home>
+    </Container>
   )
 }

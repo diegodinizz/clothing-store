@@ -12,7 +12,11 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const Buttons = styled.div`
+const Title = styled.h2`
+  margin: 10px 0;
+`;
+
+const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
@@ -49,7 +53,7 @@ export class SignIn extends React.Component {
   render () {
     return (
       <Container>
-        <h2>I already have an account</h2>
+        <Title>I already have an account</Title>
         <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
@@ -69,12 +73,12 @@ export class SignIn extends React.Component {
             label='password'
             required
           />
-          <Buttons>
+          <ButtonsContainer>
             <CustomButton type='submit'>sign in</CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
               Sign in with Google
             </CustomButton>
-          </Buttons>
+          </ButtonsContainer>
         </form>
       </Container>
     )

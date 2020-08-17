@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { CollectionPreview } from './CollectionPreview'
+import CollectionPreview from './CollectionPreview'
 import { selectCollectionsForPreview } from '../redux/shop/shop.selectors'
 
 const Container = styled.div`

@@ -28,24 +28,20 @@ const ImageContainer = styled.div`
   }
 `
 
-const Name = styled.span`
+const TextContainer = styled.span`
   width: 23%;
 `
 
-const Quantity = styled.span`
-  width: 23%;
+const QuantityContainer = styled(TextContainer)`
   display: flex;
-`
-const Arrow = styled.div`
-  cursor: pointer;
-`
 
-const Value = styled.div`
-  margin: 0 10px;
-`
+  span {
+    margin: 0 10px;
+  }
 
-const Price = styled.span`
-  width: 23%;
+  div {
+    cursor: pointer;
+  }
 `
 
 const RemoveButton = styled.div`
@@ -61,13 +57,13 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       <ImageContainer>
         <img alt='item' src={imageUrl} />
       </ImageContainer>
-      <Name>{name}</Name>
-      <Quantity>
-        <Arrow onClick={() => removeItem(cartItem)}>&#10094;</Arrow>
-        <Value>{quantity}</Value>
-        <Arrow onClick={() => addItem(cartItem)}>&#10095;</Arrow>
-      </Quantity>
-      <Price>{price}</Price>
+      <TextContainer>{name}</TextContainer>
+      <QuantityContainer>
+        <div onClick={() => removeItem(cartItem)}>&#10094;</div>
+        <span>{quantity}</span>
+        <div onClick={() => addItem(cartItem)}>&#10095;</div>
+      </QuantityContainer>
+      <TextContainer>{price}</TextContainer>
       <RemoveButton onClick={() => clearItem(cartItem)}>&#10005;</RemoveButton>
     </Container>
   )

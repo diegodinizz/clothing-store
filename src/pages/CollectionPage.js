@@ -11,33 +11,31 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const Title = styled.h2`
+const TitleContainer = styled.h2`
   font-size: 38px;
   margin: 0 auto 30px;
 `
 
-const Collections = styled.div`
+const CollectionItemsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-`
+  gap: 10px 25px;
 
-const Items = styled(Collections)`
-  margin-bottom: 30px;
-  grid-gap: 10px;
+  & > div {
+    margin-bottom: 30px;
+  }
 `
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection
   return (
     <Container>
-      <Title>{title}</Title>
-      <Collections>
+      <TitleContainer>{title}</TitleContainer>
+      <CollectionItemsContainer>
         {items.map(item => (
-          <Items key={item.id}>
-            <CollectionItem item={item} />
-          </Items>
+          <CollectionItem key={item.id} item={item} />
         ))}
-      </Collections>
+      </CollectionItemsContainer>
     </Container>
   )
 }

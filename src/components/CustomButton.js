@@ -1,7 +1,48 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const Button = styled.button`
+const buttonStyles = css`
+  background-color: black;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+`
+
+const invertedButtonStyles = css`
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    border: none;
+  }
+`
+
+const googleSignInStyles = css`
+  background-color: #4285f4;
+  color: white;
+
+  &:hover {
+    background-color: #357ae8;
+    border: none;
+  }
+`
+
+const getButtonStyles = props => {
+  if (props.isGoogleSignIn) {
+    return googleSignInStyles
+  }
+
+  return props.inverted ? invertedButtonStyles : buttonStyles
+}
+
+const Container = styled.button`
   min-width: 165px;
   width: auto;
   height: 50px;
@@ -9,8 +50,6 @@ const Button = styled.button`
   line-height: 50px;
   padding: 0 35px 0 35px;
   font-size: 15px;
-  background-color: black;
-  color: white;
   text-transform: uppercase;
   font-family: 'Open Sans Condensed';
   font-weight: bolder;
@@ -19,47 +58,9 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
 
-  :hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-  }
-
-  &.google-sign-in {
-    background-color: #4285f4;
-    color: white;
-
-    :hover {
-      background-color: #357ae8;
-      border: none;
-    }
-  }
-
-  &.inverted {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-
-    :hover {
-      background-color: black;
-      color: white;
-      border: none;
-    }
-  }
+  ${getButtonStyles}
 `
 
-export const CustomButton = ({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}) => (
-  <Button
-    className={`${inverted ? 'inverted' : ''} ${
-      isGoogleSignIn ? 'google-sign-in' : ''
-    }`}
-    {...otherProps}
-  >
-    {children}
-  </Button>
+export const CustomButton = ({ children, ...props }) => (
+  <Container {...props}>{children}</Container>
 )

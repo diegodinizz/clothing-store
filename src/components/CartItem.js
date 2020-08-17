@@ -8,11 +8,11 @@ const Container = styled.div`
   margin-bottom: 15px;
 `
 
-const Image = styled.img`
+const CartItemImage = styled.img`
   width: 30%;
 `
 
-const ItemDetails = styled.div`
+const ItemDetailsContainer = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -21,18 +21,14 @@ const ItemDetails = styled.div`
   padding: 10px 20px;
 `
 
-const Name = styled.span`
-  font-size: 16px;
-`
-
 export const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
   <Container>
-    <Image src={imageUrl} alt='item' />
-    <ItemDetails>
-      <Name>{name}</Name>
+    <CartItemImage src={imageUrl} alt='item' />
+    <ItemDetailsContainer>
+      <span>{name}</span>
       <span>
         {quantity} x ${price}
       </span>
-    </ItemDetails>
+    </ItemDetailsContainer>
   </Container>
 )

@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { toggleCartHidden } from '../redux/cart/cart.actions'
 import { selectCartItemsCount } from '../redux/cart/cart.selectors'
 
-import { ReactComponent as ShoppingIcon } from '../assets/shopping-bag.svg'
+import { ReactComponent as ShoppingIconSVG } from '../assets/shopping-bag.svg'
 
 const Container = styled.div`
   width: 45px;
@@ -18,12 +18,12 @@ const Container = styled.div`
   cursor: pointer;
 `
 
-const ShoppingIconContainer = styled.div`
+const ShoppingIcon = styled(ShoppingIconSVG)`
   width: 24px;
   height: 24px;
 `
 
-const ItemCount = styled.span`
+const ItemCountContainer = styled.span`
   position: absolute;
   font-size: 10px;
   font-weight: bold;
@@ -32,10 +32,8 @@ const ItemCount = styled.span`
 
 const CartIcon = ({ toggleCartHidden, itemCount }) => (
   <Container onClick={toggleCartHidden}>
-    <ShoppingIconContainer>
-      <ShoppingIcon />
-    </ShoppingIconContainer>
-    <ItemCount>{itemCount}</ItemCount>
+    <ShoppingIcon />
+    <ItemCountContainer>{itemCount}</ItemCountContainer>
   </Container>
 )
 

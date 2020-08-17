@@ -25,15 +25,11 @@ const Container = styled.div`
   z-index: 5;
 `
 
-const Cart = styled.div`
+const CartItemsContainer = styled.div`
   height: 240px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
-`
-
-const Button = styled.div`
-  margin: auto;
 `
 
 const EmptyCart = styled.span`
@@ -41,9 +37,13 @@ const EmptyCart = styled.span`
   margin: 50px auto;
 `
 
+const CartDropdownButton = styled(CustomButton)`
+  margin: auto;
+`
+
 const CartDropdown = ({ cartItems, history, dispatch }) => (
   <Container>
-    <Cart>
+    <CartItemsContainer>
       {cartItems.length ? (
         cartItems.map(cartItem => (
           <CartItem key={cartItem.id} item={cartItem} />
@@ -51,17 +51,15 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
       ) : (
         <EmptyCart>Your cart is empty</EmptyCart>
       )}
-    </Cart>
-    <Button>
-      <CustomButton
-        onClick={() => {
-          history.push('/checkout')
-          dispatch(toggleCartHidden())
-        }}
-      >
-        GO TO CHECKOUT
-      </CustomButton>
-    </Button>
+    </CartItemsContainer>
+    <CartDropdownButton
+      onClick={() => {
+        history.push('/checkout')
+        dispatch(toggleCartHidden())
+      }}
+    >
+      GO TO CHECKOUT
+    </CartDropdownButton>
   </Container>
 )
 

@@ -20,13 +20,13 @@ const Container = styled.div`
   margin-bottom: 25px;
 `
 
-const Crown = styled.div`
+const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
   padding: 25px;
 `
 
-const Options = styled.div`
+const OptionsContainer = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
@@ -34,34 +34,26 @@ const Options = styled.div`
   justify-content: flex-end;
 `
 
-const ShopOption = styled.div`
+const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
 `
 
 const Header = ({ currentUser, hidden }) => (
   <Container>
-    <Link to='/'>
-      <Crown>
-        <Logo />
-      </Crown>
-    </Link>
-    <Options>
-      <Link to='/shop'>
-        <ShopOption>SHOP</ShopOption>
-      </Link>
-      <Link to='/shop'>
-        <ShopOption>CONTACT</ShopOption>
-      </Link>
+    <LogoContainer to='/'>
+      <Logo />
+    </LogoContainer>
+    <OptionsContainer>
+      <OptionLink to='/shop'>SHOP</OptionLink>
+      <OptionLink to='/shop'>CONTACT</OptionLink>
       {currentUser ? (
-        <ShopOption onClick={() => auth.signOut()}>SIGN OUT</ShopOption>
+        <OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
       ) : (
-        <Link to='/signin'>
-          <ShopOption>SIGN IN</ShopOption>
-        </Link>
+        <OptionLink to='/signin'>SIGN IN</OptionLink>
       )}
       <CartIcon />
-    </Options>
+    </OptionsContainer>
     {hidden ? null : <CartDropdown />}
   </Container>
 )

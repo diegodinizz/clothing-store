@@ -22,7 +22,7 @@ const Container = styled.div`
   }
 `
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   width: 100%;
   padding: 10px 0;
   display: flex;
@@ -34,7 +34,7 @@ const HeaderBlock = styled.div`
   text-transform: capitalize;
   width: 23%;
 
-  :last-child {
+  &:last-child {
     width: 8%;
   }
 `
@@ -45,7 +45,7 @@ const Total = styled.div`
   font-size: 36px;
 `
 
-const TestWarning = styled.div`
+const WarningContainer = styled.div`
   text-align: center;
   margin-top: 40px;
   font-size: 24px;
@@ -54,7 +54,7 @@ const TestWarning = styled.div`
 
 const CheckoutPage = ({ cartItems, total }) => (
   <Container>
-    <Header>
+    <HeaderContainer>
       <HeaderBlock>
         <span>Product</span>
       </HeaderBlock>
@@ -70,18 +70,18 @@ const CheckoutPage = ({ cartItems, total }) => (
       <HeaderBlock>
         <span>Remove</span>
       </HeaderBlock>
-    </Header>
+    </HeaderContainer>
     {cartItems.map(cartItem => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
     <Total>
       <span>TOTAL: ${total}</span>
     </Total>
-    <TestWarning>
+    <WarningContainer>
       *Please use the following test credit card for payments*
       <br />
       4242 4242 4242 4242 - Exp: 01/22 - CVV: 123
-    </TestWarning>
+    </WarningContainer>
     <StripeCheckoutButton price={total} />
   </Container>
 )

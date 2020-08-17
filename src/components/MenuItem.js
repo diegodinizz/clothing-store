@@ -7,10 +7,10 @@ const BackgroundImage = styled.div`
   height: 100%;
   background-position: center;
   background-size: cover;
-  background-image: url(${props => props.image});
+  background-image: url(${({imageUrl}) => imageUrl});
 `
 
-const Content = styled.div`
+const ContentContainer = styled.div`
   height: 90px;
   padding: 0 25px;
   display: flex;
@@ -23,9 +23,9 @@ const Content = styled.div`
   position: absolute;
 `
 
-const ItemMenu = styled.div`
+const Container = styled.div`
+  height: ${({ size }) => (size ? '450px' : '290px')};
   min-width: 30%;
-  height: 290px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@ const ItemMenu = styled.div`
   margin: 0 7.5px 15px;
   overflow: hidden;
 
-  :hover {
+  &:hover {
     cursor: pointer;
 
     ${BackgroundImage} {
@@ -42,27 +42,22 @@ const ItemMenu = styled.div`
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
-    ${Content} {
+    ${ContentContainer} {
       opacity: 0.9;
     }
   }
 
-  &.large {
-    height: 450px;
-  }
-
-  :first-child {
+  &:first-child {
     margin-right: 7.5px;
   }
 
-  :last-child {
+  &:last-child {
     margin-left: 7.5px;
   }
 `
 
-const Title = styled.h1`
+const Title = styled.span`
   font-weight: bold;
-  margin-top: 0;
   margin-bottom: 6px;
   font-size: 22px;
   color: #4a4a4a;
@@ -75,16 +70,16 @@ const Subtitle = styled.span`
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
   return (
-    <ItemMenu
-      className={size}
+    <Container
+      size={size}
       onClick={() => history.push(`${match.url}${linkUrl}`)}
     >
-      <BackgroundImage image={imageUrl} />
-      <Content>
+      <BackgroundImage imageUrl={imageUrl} />
+      <ContentContainer>
         <Title>{title.toUpperCase()}</Title>
         <Subtitle>SHOP NOW</Subtitle>
-      </Content>
-    </ItemMenu>
+      </ContentContainer>
+    </Container>
   )
 }
 
