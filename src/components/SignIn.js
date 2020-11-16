@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import { FormInput } from './FormInput'
 import { CustomButton } from './CustomButton'
 
 import { auth, signInWithGoogle } from '../firebase/firebase.utils'
+import { googleSignInStart } from '../redux/user/user.actions'
 
 const Container = styled.div`
   width: 380px;
@@ -21,7 +23,7 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
 `
 
-export class SignIn extends React.Component {
+class SignIn extends React.Component {
   constructor (props) {
     super(props)
 
@@ -51,6 +53,7 @@ export class SignIn extends React.Component {
   }
 
   render () {
+    const { googleSignInStart } = this.props
     return (
       <Container>
         <Title>I already have an account</Title>
@@ -75,7 +78,11 @@ export class SignIn extends React.Component {
           />
           <ButtonsContainer>
             <CustomButton type='submit'>sign in</CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            <CustomButton
+              type='button'
+              onClick={googleSignInStart}
+              isGoogleSignIn
+            >
               Sign in with Google
             </CustomButton>
           </ButtonsContainer>
@@ -84,3 +91,9 @@ export class SignIn extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  googleSignInStart: () => dispatch(googleSignInStart())
+})
+
+export default connect(null, mapDispatchToProps)(SignIn)
