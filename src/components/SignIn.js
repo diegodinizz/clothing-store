@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   margin: 10px 0;
-`;
+`
 
 const ButtonsContainer = styled.div`
   display: flex;
