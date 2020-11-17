@@ -12,16 +12,12 @@ import CheckoutPage from './pages/CheckoutPage'
 
 import Header from './components/Header'
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-
-import { setCurretUser } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selectors'
 
 class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount () {
-    const { setCurretUser } = this.props
 
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
@@ -72,8 +68,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-  setCurretUser: user => dispatch(setCurretUser(user))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
