@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import SignIn from '../components/SignIn'
-import { SignUp } from '../components/SignUp'
+import SignUp from '../components/SignUp'
 
 const Container = styled.div`
   width: 850px;

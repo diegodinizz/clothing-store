@@ -6,7 +6,9 @@ import {
   signInSuccess,
   signInFailure,
   signOutSuccess,
-  signnOutFailure
+  signOutFailure,
+  signUpSuccess,
+  signUpFailure
 } from './user.actions'
 
 import {
@@ -16,9 +18,13 @@ import {
   getCurrentUser
 } from '../../firebase/firebase.utils'
 
-export function * getSnapShotFromUserAuth (userAuth) {
+export function * getSnapShotFromUserAuth (userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth)
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    )
     const userSnapshot = yield userRef.get()
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
   } catch (error) {
@@ -59,8 +65,21 @@ export function * signOut () {
     yield auth.signOut()
     yield put(signOutSuccess())
   } catch (error) {
-    yield put(signnOutFailure(error))
+    yield put(signOutFailure(error))
   }
+}
+
+export function * signUp ({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password)
+    yield put(signUpSuccess({ user, additionalData: { displayName } }))
+  } catch (error) {
+    yield put(signUpFailure(error))
+  }
+}
+
+export function * signInAfterSignUp ({ payload: { user, additionalData } }) {
+  yield getSnapShotFromUserAuth(user, additionalData)
 }
 
 export function * onGoogleSignInStart () {
@@ -79,11 +98,21 @@ export function * onUserSignOutStart () {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
 }
 
+export function * onSignUpStart () {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUp)
+}
+
+export function * onnSignUpSuccess () {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
+}
+
 export function * userSagas () {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onCheckUserSession),
-    call(onUserSignOutStart)
+    call(onUserSignOutStart),
+    call(onSignUpStart),
+    call(onnSignUpSuccess)
   ])
 }
