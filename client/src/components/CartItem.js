@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   height: 80px;
   margin-bottom: 15px;
+  flex-shrink: 0;
 `
 
 const CartItemImage = styled.img`
