@@ -11,7 +11,7 @@ const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
-  background-image: url(${({imageUrl}) => imageUrl});
+  background-image: url(${({ imageUrl }) => imageUrl});
 `
 
 const Container = styled.div`
